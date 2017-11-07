@@ -18,6 +18,9 @@ namespace PrimeAddin
         private void Launchbtn_Click(object sender, RibbonControlEventArgs e)
         {
             Globals.ThisAddIn.DemoFind();
+            // must find a way to launch datagridview/ share local variables
+            Form1 form1 = new Form1();
+            form1.Show();
         }
 
 

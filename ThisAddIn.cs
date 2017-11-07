@@ -61,6 +61,8 @@ namespace PrimeAddin
                 if (firstFind == null)
                 {
                     firstFind = currentFind;
+                    // use EntireRow to return entire row of cell containing "construction"
+                    // Cell.EntireRow.Row to get index? need a way to launch datagridview...
                 }
 
                 // If you didn't move to a new range, you are done.
@@ -75,6 +77,13 @@ namespace PrimeAddin
 
                 currentFind.Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
                 currentFind.Font.Bold = true;
+
+               // for (int i; i < lastUsedRow; i++)
+                //{
+                    //Form1.dataGridView1.Rows[i].Cells["Column1"].Value = sheet.Cells[i + 1, 1].Value;
+                    //dataGridView1.Rows[i].Cells["Column2"].Value = sheet.Cells[i + 1, 2].Value;
+                    //dataGridView1.Rows.Add(sheet.Cells[i + 1, 1].Value, sheet.Cells[i + 1, 2].Value);
+                //}
 
                 // FindNext uses previous search settings to repeat search
                 currentFind = InsuredNames.FindNext(currentFind);

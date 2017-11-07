@@ -26,7 +26,8 @@ namespace PrimeAddin
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            //need to share things in this class with ThisAddIn
+            
         }
     }
 }

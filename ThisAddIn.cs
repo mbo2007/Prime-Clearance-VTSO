@@ -31,20 +31,26 @@ namespace PrimeAddin
         }
 
         #endregion
+
         // edit to suit needs
         // perhaps should return a set of rows/addresses? 
         internal void DemoFind()
         {
-            Excel.Worksheet sheet = Application.ActiveSheet;
+            Excel.Worksheet sheet = Globals.ThisAddIn.Application.ActiveSheet;
             Excel.Range currentFind = null;
             Excel.Range firstFind = null;
+            int matchRow;
+
+            //obviously there must be some better way to do this... clean up when you get the chance
+            string[] rowContents = new string[35] {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+                                                   null, null, null, null, null, null, null, null, null, null, null};
 
             // last is last used range before cells get empty
             Excel.Range last = sheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
             Excel.Range range = sheet.get_Range("A1", last);
 
             Excel.Range InsuredNames = range.Columns["C"];
-             
+
             // keep these two for later
             int lastUsedRow = last.Row;
             int lastUsedColumn = last.Column;
@@ -73,22 +79,34 @@ namespace PrimeAddin
                 }
 
                 // action taken after match(es) found
+                matchRow = currentFind.EntireRow.Row;
+
+                for (int i = 0; i < 34; i ++)
+                {
+                    rowContents[i] = ((Excel.Range)sheet.Cells(i + 1, matchRow)).Value;
+                }
+
                 currentFind.Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
 
                 currentFind.Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
                 currentFind.Font.Bold = true;
 
-               // for (int i; i < lastUsedRow; i++)
+                // for (int i; i < lastUsedRow; i++)
                 //{
-                    //Form1.dataGridView1.Rows[i].Cells["Column1"].Value = sheet.Cells[i + 1, 1].Value;
-                    //dataGridView1.Rows[i].Cells["Column2"].Value = sheet.Cells[i + 1, 2].Value;
-                    //dataGridView1.Rows.Add(sheet.Cells[i + 1, 1].Value, sheet.Cells[i + 1, 2].Value);
+                //Form1.dataGridView1.Rows[i].Cells["Column1"].Value = sheet.Cells[i + 1, 1].Value;
+                //dataGridView1.Rows[i].Cells["Column2"].Value = sheet.Cells[i + 1, 2].Value;
+                //dataGridView1.Rows.Add(sheet.Cells[i + 1, 1].Value, sheet.Cells[i + 1, 2].Value);
                 //}
+
+                // at end, before executing FindNext, CREATE ARRAY CONTAINING ALL VALUES OF ROW
+                // PASS THIS ARRAY INTO FORM BY CALLING METHOD IN FORM THAT ACCEPTS IN PARAMS/ CREATES NEW ROW IN DT WHEN CALLED
 
                 // FindNext uses previous search settings to repeat search
                 currentFind = InsuredNames.FindNext(currentFind);
                 // necessary to loop thru FindNext until finished with range?
             }
         }
+
+
     }
 }

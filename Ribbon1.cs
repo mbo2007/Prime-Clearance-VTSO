@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Office.Tools.Ribbon;
 using Excel = Microsoft.Office.Interop.Excel;
+using PrimeAddin;
 
 
 namespace PrimeAddin
@@ -17,9 +18,9 @@ namespace PrimeAddin
 
         private void Launchbtn_Click(object sender, RibbonControlEventArgs e)
         {
-            Globals.ThisAddIn.DemoFind();
             // must find a way to launch datagridview/ share local variables
             Form1 form1 = new Form1();
+            //use params of constructor to pass rows into datagridview? cycle/iterate thru arguments
             form1.Show();
         }
 

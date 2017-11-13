@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Office.Tools.Excel;
 using Excel = Microsoft.Office.Interop.Excel;
+using PrimeAddin;
+
 
 namespace PrimeAddin
 {
@@ -17,6 +19,7 @@ namespace PrimeAddin
         public Form1()
         {
             InitializeComponent();
+            DataTable matchingRows = Globals.ThisAddIn.DemoFind();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -26,8 +29,8 @@ namespace PrimeAddin
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //need to share things in this class with ThisAddIn
-            
+            //need to share things in this class with ThisAddIn            
         }
     }
+
 }
